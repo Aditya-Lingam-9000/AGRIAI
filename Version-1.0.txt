@@ -1,0 +1,38 @@
+Version 1.0 – Basic Farmer Planning + Simple Chatbot (MVP)
+Goal: Help farmers plan crop cultivation and ask basic questions.
+
+👨‍🌾 Features:
+
+1.Frontend
+		Farmer Login
+				Mobile OTP authentication
+				Google account login
+				Farmer Profile
+				Name, location, language
+		Field Input Form
+				Land area (acres)
+				Crop selection
+				Water availability
+				Investment level
+
+2.Simple Chatbot (Text-based)
+		Predefined questions & answers
+		Examples:
+		“Which fertilizer is used?”
+		“Crop duration?”
+		“Water requirement?”
+		Crop Plan Display
+
+3.Backend
+
+	Auth services (OTP / Google)
+	Farmer & field database
+	Rule-based crop planning logic
+	Rule-based chatbot engine
+	Basic advisory database
+
+4.Output
+
+	Basic crop plan
+	Fertilizer schedule
+	Estimated cost & yield
