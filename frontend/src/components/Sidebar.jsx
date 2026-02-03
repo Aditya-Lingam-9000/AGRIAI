@@ -11,17 +11,25 @@ const menuItems = [
 ];
 
 export default function Sidebar({ activePage, onNavigate, user, onLogout }) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleNavClick = (pageId) => {
+    onNavigate(pageId);
+    // Close sidebar on mobile after navigation
+    setIsOpen(false);
+  };
 
   return (
     <>
-      {/* Mobile Overlay */}
-      <div 
-        className={`sidebar-overlay ${!collapsed ? 'sidebar-overlay-hidden' : ''}`}
-        onClick={() => setCollapsed(false)}
-      />
+      {/* Mobile Overlay - only visible when sidebar is open */}
+      {isOpen && (
+        <div 
+          className="sidebar-overlay"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
 
-      <aside className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`}>
+      <aside className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}>
         {/* Header */}
         <div className="sidebar-header">
           <div className="sidebar-logo">
@@ -29,10 +37,10 @@ export default function Sidebar({ activePage, onNavigate, user, onLogout }) {
             <span className="logo-text">AgriAI</span>
           </div>
           <button 
-            className="sidebar-toggle"
-            onClick={() => setCollapsed(!collapsed)}
+            className="sidebar-close"
+            onClick={() => setIsOpen(false)}
           >
-            {collapsed ? '→' : '←'}
+            ✕
           </button>
         </div>
 
@@ -42,7 +50,7 @@ export default function Sidebar({ activePage, onNavigate, user, onLogout }) {
             <button
               key={item.id}
               className={`nav-item ${activePage === item.id ? 'nav-item-active' : ''}`}
-              onClick={() => onNavigate(item.id)}
+              onClick={() => handleNavClick(item.id)}
               style={{ animationDelay: `${index * 50}ms` }}
             >
               <span className="nav-icon">{item.icon}</span>
@@ -74,10 +82,10 @@ export default function Sidebar({ activePage, onNavigate, user, onLogout }) {
         </div>
       </aside>
 
-      {/* Mobile Toggle */}
+      {/* Mobile Toggle Button - hamburger menu */}
       <button 
         className="mobile-toggle"
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={() => setIsOpen(true)}
       >
         ☰
       </button>
