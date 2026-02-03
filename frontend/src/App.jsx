@@ -14,17 +14,29 @@ export default function App() {
   const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
-    // Handle redirect result (for mobile Google Sign-In)
-    getRedirectResult(auth).catch(() => {
-      // Ignore errors here; onAuthStateChanged will handle auth state
-    });
+    const handleAuth = async () => {
+      try {
+        // Check if we're returning from a redirect (mobile)
+        const result = await getRedirectResult(auth);
+        if (result?.user) {
+          setUser(result.user);
+          setShowLogin(false);
+        }
+      } catch (error) {
+        // Ignore redirect errors; let onAuthStateChanged handle normal flow
+        console.log("Redirect result:", error.message);
+      }
 
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-      if (user) setShowLogin(false);
-    });
-    return unsubscribe;
+      // Set up auth state listener
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setUser(user);
+        setLoading(false);
+        if (user) setShowLogin(false);
+      });
+      return unsubscribe;
+    };
+
+    handleAuth();
   }, []);
 
   if (loading) return <PageLoader />;
