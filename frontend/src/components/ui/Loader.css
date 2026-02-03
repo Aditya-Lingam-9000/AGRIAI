@@ -1,0 +1,259 @@
+/* src/components/ui/Loader.css */
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+/* Fullscreen */
+.loader-fullscreen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 9999;
+}
+
+/* Sizes */
+.loader-sm { --loader-size: 24px; }
+.loader-md { --loader-size: 40px; }
+.loader-lg { --loader-size: 60px; }
+.loader-xl { --loader-size: 80px; }
+
+/* Loader Text */
+.loader-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ===== Spinner Variant ===== */
+.loader-spinner {
+  width: var(--loader-size);
+  height: var(--loader-size);
+  position: relative;
+}
+
+.spinner-ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid transparent;
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-ring:nth-child(2) {
+  inset: 4px;
+  border-top-color: var(--accent-secondary);
+  animation-duration: 1.5s;
+  animation-direction: reverse;
+}
+
+.spinner-ring:nth-child(3) {
+  inset: 8px;
+  border-top-color: var(--accent-tertiary);
+  animation-duration: 2s;
+}
+
+/* ===== Dots Variant ===== */
+.loader-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.loader-dot {
+  width: calc(var(--loader-size) / 4);
+  height: calc(var(--loader-size) / 4);
+  background: var(--accent-primary);
+  border-radius: 50%;
+  animation: loadingDots 1.4s ease-in-out infinite both;
+}
+
+.loader-dot:nth-child(1) { animation-delay: -0.32s; }
+.loader-dot:nth-child(2) { animation-delay: -0.16s; }
+.loader-dot:nth-child(3) { animation-delay: 0s; }
+
+/* ===== Pulse Variant ===== */
+.loader-pulse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pulse-circle {
+  width: calc(var(--loader-size) / 3);
+  height: calc(var(--loader-size) / 3);
+  background: var(--gradient-accent);
+  border-radius: 50%;
+  animation: pulseScale 1.5s ease-in-out infinite;
+}
+
+.pulse-circle:nth-child(2) { animation-delay: 0.2s; }
+.pulse-circle:nth-child(3) { animation-delay: 0.4s; }
+
+/* ===== Orbital Variant ===== */
+.loader-orbital {
+  width: var(--loader-size);
+  height: var(--loader-size);
+  position: relative;
+}
+
+.orbital-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(var(--loader-size) / 2);
+  animation: pulseScale 2s ease-in-out infinite;
+}
+
+.orbital-ring {
+  position: absolute;
+  inset: 0;
+  animation: spin 3s linear infinite;
+}
+
+.orbital-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-primary);
+}
+
+.orbital-dot:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.orbital-dot:nth-child(2) {
+  bottom: 15%;
+  left: 10%;
+  background: var(--accent-secondary);
+  box-shadow: 0 0 10px var(--accent-secondary);
+}
+
+.orbital-dot:nth-child(3) {
+  bottom: 15%;
+  right: 10%;
+  background: var(--accent-tertiary);
+  box-shadow: 0 0 10px var(--accent-tertiary);
+}
+
+/* ===== Agri Plant Animation ===== */
+.loader-agri {
+  width: var(--loader-size);
+  height: calc(var(--loader-size) * 1.5);
+  position: relative;
+}
+
+.agri-plant {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.agri-stem {
+  width: 4px;
+  height: 0;
+  background: var(--accent-primary);
+  border-radius: 2px;
+  margin: 0 auto;
+  animation: growStem 2s ease-out infinite;
+}
+
+@keyframes growStem {
+  0% { height: 0; }
+  50%, 100% { height: 40px; }
+}
+
+.agri-leaf {
+  position: absolute;
+  width: 16px;
+  height: 8px;
+  background: var(--accent-primary);
+  border-radius: 50% 0;
+  opacity: 0;
+  transform-origin: left center;
+}
+
+.agri-leaf-1 {
+  bottom: 30px;
+  left: 4px;
+  animation: growLeaf 2s ease-out infinite 0.5s;
+}
+
+.agri-leaf-2 {
+  bottom: 20px;
+  right: 4px;
+  transform: scaleX(-1);
+  animation: growLeaf 2s ease-out infinite 0.7s;
+}
+
+.agri-leaf-3 {
+  bottom: 10px;
+  left: 4px;
+  animation: growLeaf 2s ease-out infinite 0.9s;
+}
+
+@keyframes growLeaf {
+  0% { opacity: 0; transform: scale(0) rotate(-45deg); }
+  50%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.agri-ground {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 10px;
+  background: linear-gradient(to bottom, #8b5a2b, #654321);
+  border-radius: 50%;
+}
+
+/* ===== Page Loader ===== */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  background: var(--bg-primary);
+  z-index: 9999;
+}
+
+.page-loader-text {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ===== Inline Loader ===== */
+.inline-loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.inline-dot {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  animation: loadingDots 1.4s ease-in-out infinite both;
+}
+
+.inline-dot:nth-child(1) { animation-delay: -0.32s; }
+.inline-dot:nth-child(2) { animation-delay: -0.16s; }
+.inline-dot:nth-child(3) { animation-delay: 0s; }

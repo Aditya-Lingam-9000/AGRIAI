@@ -1,0 +1,274 @@
+/* src/pages/CropPlan.css */
+
+.plan-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* ===== Generate Card ===== */
+.generate-card {
+  animation: fadeInUp 0.5s ease;
+}
+
+.generate-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+}
+
+.generate-icon {
+  font-size: 4rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.generate-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+}
+
+.generate-description {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  max-width: 450px;
+  line-height: 1.6;
+}
+
+/* ===== Loading ===== */
+.plan-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-3xl);
+}
+
+.plan-loading p {
+  color: var(--text-secondary);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ===== Plan Results ===== */
+.plan-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  animation: fadeInUp 0.5s ease;
+}
+
+/* ===== Summary Card ===== */
+.plan-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summary-crop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.summary-icon {
+  font-size: 3rem;
+  animation: pulseScale 3s ease-in-out infinite;
+}
+
+.summary-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.summary-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ===== Stats Grid ===== */
+.plan-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.plan-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.plan-stat:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-accent);
+}
+
+.stat-emoji {
+  font-size: 2rem;
+}
+
+.stat-number {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.plan-stat .stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.plan-stat-duration:hover { border-color: #f59e0b; }
+.plan-stat-duration .stat-number { color: #f59e0b; }
+
+.plan-stat-cost:hover { border-color: #10b981; }
+.plan-stat-cost .stat-number { color: #10b981; }
+
+.plan-stat-yield:hover { border-color: #8b5cf6; }
+.plan-stat-yield .stat-number { color: #8b5cf6; }
+
+/* ===== Schedule Timeline ===== */
+.schedule-card {
+  animation: fadeInUp 0.5s ease 0.1s forwards;
+  opacity: 0;
+}
+
+.schedule-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  position: relative;
+  padding-left: var(--space-xl);
+}
+
+.schedule-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-primary);
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -26px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-accent);
+  border-radius: 50%;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--bg-primary);
+  z-index: 1;
+}
+
+.timeline-content {
+  flex: 1;
+  padding: var(--space-md);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.timeline-content:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+
+.timeline-week {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--accent-primary);
+}
+
+.timeline-fertilizer {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.timeline-details {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.timeline-quantity {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.timeline-per-acre {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+/* ===== Tips Card ===== */
+.tips-card {
+  animation: fadeInUp 0.5s ease 0.2s forwards;
+  opacity: 0;
+}
+
+.tip-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.tip-content .tip-icon {
+  font-size: 1.5rem;
+}
+
+.tip-content .tip-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .plan-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-summary {
+    flex-direction: column;
+    gap: var(--space-lg);
+    text-align: center;
+  }
+
+  .summary-crop {
+    flex-direction: column;
+  }
+}
