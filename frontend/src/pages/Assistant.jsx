@@ -38,7 +38,7 @@ export default function Assistant() {
     setLoading(true);
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/chat', {
+      const res = await fetch('https://agriai-backend-w5l3.onrender.com/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question }),

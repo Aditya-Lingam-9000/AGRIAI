@@ -33,7 +33,7 @@ export default function Profile({ user }) {
     setLoading(true);
     try {
       const token = user.accessToken;
-      const res = await fetch('http://127.0.0.1:8000/profile', {
+      const res = await fetch('https://agriai-backend-w5l3.onrender.com/profile', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

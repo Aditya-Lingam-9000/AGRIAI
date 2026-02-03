@@ -15,7 +15,7 @@ export default function CropPlan({ user }) {
     setLoading(true);
     try {
       const token = user.accessToken;
-      const res = await fetch('http://127.0.0.1:8000/plan', {
+      const res = await fetch('https://agriai-backend-w5l3.onrender.com/plan', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
