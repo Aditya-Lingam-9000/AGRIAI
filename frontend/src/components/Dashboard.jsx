@@ -30,7 +30,7 @@ export default function Dashboard() {
   useEffect(() => {
     if (!user) return;
     const token = user.accessToken;
-    fetch("http://127.0.0.1:8000/profile", {
+    fetch("https://agriai-backend-w5l3.onrender.com/profile", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -44,7 +44,7 @@ export default function Dashboard() {
     setLoading({ ...loading, profile: true });
     const token = user.accessToken;
     try {
-      const res = await fetch("http://127.0.0.1:8000/profile", {
+      const res = await fetch("https://agriai-backend-w5l3.onrender.com/profile", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export default function Dashboard() {
     setLoading({ ...loading, field: true });
     const token = user.accessToken;
     try {
-      const res = await fetch("http://127.0.0.1:8000/fields", {
+      const res = await fetch("https://agriai-backend-w5l3.onrender.com/fields", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export default function Dashboard() {
     setLoading({ ...loading, plan: true });
     const token = user.accessToken;
     try {
-      const res = await fetch("http://127.0.0.1:8000/plan", {
+      const res = await fetch("https://agriai-backend-w5l3.onrender.com/plan", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -110,7 +110,7 @@ export default function Dashboard() {
   const handleChat = async () => {
     setLoading({ ...loading, chat: true });
     try {
-      const res = await fetch("http://127.0.0.1:8000/chat", {
+      const res = await fetch("https://agriai-backend-w5l3.onrender.com/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: chatQuestion }),
