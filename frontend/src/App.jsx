@@ -1,6 +1,6 @@
 // src/App.jsx
 import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, getRedirectResult } from "firebase/auth";
 import { auth } from "./firebase";
 import LandingPage from "./components/LandingPage";
 import LoginScreen from "./components/LoginScreen";
@@ -14,6 +14,11 @@ export default function App() {
   const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
+    // Handle redirect result (for mobile Google Sign-In)
+    getRedirectResult(auth).catch(() => {
+      // Ignore errors here; onAuthStateChanged will handle auth state
+    });
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
