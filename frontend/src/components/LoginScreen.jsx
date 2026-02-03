@@ -22,18 +22,23 @@ export default function LoginScreen({ onBack }) {
   const [confirmationResult, setConfirmationResult] = useState(null);
 
   const handleGoogleSignIn = async () => {
+    console.log("LoginScreen: Google Sign-In started");
     setLoading({ ...loading, google: true });
     setError("");
     try {
       const provider = new GoogleAuthProvider();
       // Use redirect for mobile, popup for desktop
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      console.log("LoginScreen: isMobile", isMobile);
       if (isMobile) {
+        console.log("LoginScreen: Using redirect");
         await signInWithRedirect(auth, provider);
       } else {
+        console.log("LoginScreen: Using popup");
         await signInWithPopup(auth, provider);
       }
     } catch (err) {
+      console.log("LoginScreen: Error", err.message);
       setError(err.message);
     } finally {
       setLoading({ ...loading, google: false });

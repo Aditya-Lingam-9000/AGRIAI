@@ -15,20 +15,23 @@ export default function App() {
 
   useEffect(() => {
     const handleAuth = async () => {
+      console.log("App: handleAuth started");
       try {
         // Check if we're returning from a redirect (mobile)
         const result = await getRedirectResult(auth);
+        console.log("App: redirect result", result?.user?.email || "no user");
         if (result?.user) {
           setUser(result.user);
           setShowLogin(false);
         }
       } catch (error) {
         // Ignore redirect errors; let onAuthStateChanged handle normal flow
-        console.log("Redirect result:", error.message);
+        console.log("App: Redirect error:", error.message);
       }
 
       // Set up auth state listener
       const unsubscribe = onAuthStateChanged(auth, (user) => {
+        console.log("App: onAuthStateChanged", user?.email || "no user");
         setUser(user);
         setLoading(false);
         if (user) setShowLogin(false);
