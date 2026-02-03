@@ -14,38 +14,52 @@ export default function App() {
   const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
-    const handleAuth = async () => {
-      console.log("App: handleAuth started");
+    let unsubscribe;
+
+    // Handle redirect result first (for mobile browsers)
+    const checkRedirect = async () => {
       try {
-        // Check if we're returning from a redirect (mobile)
+        console.log("App: Checking redirect result...");
         const result = await getRedirectResult(auth);
-        console.log("App: redirect result", result?.user?.email || "no user");
         if (result?.user) {
+          console.log("App: Redirect user found:", result.user.email);
           setUser(result.user);
           setShowLogin(false);
+          setLoading(false);
         }
       } catch (error) {
-        // Ignore redirect errors; let onAuthStateChanged handle normal flow
-        console.log("App: Redirect error:", error.message);
+        console.log("App: Redirect check error:", error.message);
       }
-
-      // Set up auth state listener
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        console.log("App: onAuthStateChanged", user?.email || "no user");
-        setUser(user);
-        setLoading(false);
-        if (user) setShowLogin(false);
-      });
-      return unsubscribe;
     };
 
-    handleAuth();
+    checkRedirect();
+
+    // Set up auth state listener
+    unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log("App: Auth state changed:", currentUser?.email || "no user");
+      setUser(currentUser);
+      setLoading(false);
+      if (currentUser) {
+        setShowLogin(false);
+      }
+    });
+
+    // Cleanup function
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
   }, []);
 
-  if (loading) return <PageLoader />;
+  // Show loader while checking auth
+  if (loading) {
+    return <PageLoader />;
+  }
 
   // Authenticated: show dashboard
   if (user) {
+    console.log("App: Rendering Dashboard for user:", user.email);
     return <DashboardLayout />;
   }
 

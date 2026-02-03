@@ -1,6 +1,6 @@
 // frontend/src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, browserLocalPersistence, setPersistence } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC17qtA3guXGV2rLf1ydFISZIYas_zGb_Y",
@@ -14,3 +14,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+
+// Set persistence to LOCAL to ensure auth state persists on mobile browsers
+setPersistence(auth, browserLocalPersistence)
+  .then(() => {
+    console.log("Firebase: Auth persistence set to LOCAL");
+  })
+  .catch((error) => {
+    console.error("Firebase: Error setting persistence:", error);
+  });

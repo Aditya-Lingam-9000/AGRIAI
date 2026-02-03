@@ -27,16 +27,12 @@ export default function LoginScreen({ onBack }) {
     setError("");
     try {
       const provider = new GoogleAuthProvider();
-      // Use redirect for mobile, popup for desktop
+      // Temporarily force popup on mobile for testing
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       console.log("LoginScreen: isMobile", isMobile);
-      if (isMobile) {
-        console.log("LoginScreen: Using redirect");
-        await signInWithRedirect(auth, provider);
-      } else {
-        console.log("LoginScreen: Using popup");
-        await signInWithPopup(auth, provider);
-      }
+      // Force popup for now to test
+      console.log("LoginScreen: Using popup (forced)");
+      await signInWithPopup(auth, provider);
     } catch (err) {
       console.log("LoginScreen: Error", err.message);
       setError(err.message);
